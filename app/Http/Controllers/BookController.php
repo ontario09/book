@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Book;
-use Response;
 use DataTables;
+use App\Models\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return datatables()->of(Book::select('*'))
                 ->addColumn('action', 'action')
                 ->addColumn('cover', 'image')
